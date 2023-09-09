@@ -70,3 +70,29 @@ btnHeader.forEach(btn =>{
 
     }
 )})
+function getVisits() {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.indexOf('visits=') === 0) {
+            return parseInt(cookie.substring(7));
+        }
+    }
+    return 0; // Si la cookie no existe, se considera la primera visita
+}
+
+function incrementVisits() {
+    var visits = getVisits() + 1;
+    document.cookie = 'visits=' + visits;
+}
+
+function showVisitsInConsole() {
+    var visits = getVisits();
+    console.log('Número de visitas: ' + visits); // Muestra el contador en la consola
+}
+
+// Llamar a incrementVisits() cada vez que alguien visita la página
+incrementVisits();
+
+// Llamar a showVisitsInConsole() para mostrar el contador en la consola
+showVisitsInConsole();
